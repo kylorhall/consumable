@@ -10,8 +10,20 @@ import App from '~/containers/App';
 injectGlobal`
   ${styledNormalize}
 
+  html {
+    height: 100vh;
+  }
+
+  body {
+    min-height: 100vh;
+  }
+
   html, body {
     font-family: 'Roboto', sans-serif;
+  }
+
+  body > #root {
+    min-height: 100vh;
   }
 `;
 

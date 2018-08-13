@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-  border: 5px solid red;
+  min-height: 100vh; /* grow to body and #root */
 
   display: grid;
   grid-template-areas: "header header"
