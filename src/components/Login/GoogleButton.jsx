@@ -11,5 +11,5 @@ const ColoredButton = styled(Button)`
 
 export default ({ onClick }) => <ColoredButton onClick={onClick} type="button">
   <FaGoogle />
-  Login as a Guest
+  Login with Google
 </ColoredButton>;
