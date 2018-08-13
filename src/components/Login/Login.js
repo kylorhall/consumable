@@ -4,6 +4,8 @@ import { Redirect } from 'react-router-dom';
 import Firebase from '~/helpers/firebase';
 import { Context } from '~/composers/Auth';
 
+import Input from '~/components/Form/Input';
+
 import Buttons from './Buttons';
 import EmailButton from './EmailButton';
 import GoogleButton from './GoogleButton';
@@ -59,13 +61,12 @@ export default class Login extends React.Component {
   renderRedirect = () => <Redirect to="/user" />
 
   renderLoginForm = () => <form>
-
     <p>
       {this.state.message}
     </p>
 
     <Buttons>
-      <input type="email" required value={this.state.email} name="email" onChange={this.onChangeEmail} />
+      <Input label="email" type="email" required value={this.state.email} name="email" onChange={this.onChangeEmail} />
       <EmailButton onClick={this.loginWithEmail} />
 
       <hr />
