@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
 
-import Router from '~/containers/Router';
+import App from '~/containers/App';
 
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
@@ -16,6 +16,6 @@ injectGlobal`
 `;
 
 ReactDOM.render(
-  <Router />,
+  <App />,
   document.getElementById('root'),
 );
