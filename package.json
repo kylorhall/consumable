@@ -1,0 +1,41 @@
+{
+  "name": "consumable",
+  "version": "1.0.0",
+  "description": "An application for tracking consumables for hikes and restocks especially.",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn && parcel ./src/index.html"
+  },
+  "keywords": [
+    "parcel",
+    "react",
+    "firebase"
+  ],
+  "author": "Kylor Hall <kylor@kylorhall.com> (https://kylorhall.com)",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^5.3.1",
+    "react": "^16.4.2",
+    "react-dom": "^16.4.2",
+    "react-icons": "^3.0.5",
+    "react-router-dom": "^4.3.1",
+    "styled-components": "^3.4.1",
+    "styled-normalize": "^8.0.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.6",
+    "babel-plugin-styled-components": "^1.5.1",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-react": "^6.24.1",
+    "babel-runtime": "^6.26.0",
+    "eslint": "^5.3.0",
+    "eslint-config-airbnb": "^17.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.10.0",
+    "eslint-plugin-standard": "^3.1.0",
+    "parcel-bundler": "^1.9.7"
+  }
+}
