@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Firebase from '~/helpers/firebase';
-import { Context } from '~/context/Auth';
+import { Context as AuthContext } from '~/context/Auth';
 
 import Input from '~/components/Form/Input';
 
@@ -76,11 +76,11 @@ export default class Login extends React.Component {
   </form>
 
   render() {
-    return <Context.Consumer>
+    return <AuthContext.Consumer>
       {({ user }) => {
         if (user) return this.renderRedirect();
         return this.renderLoginForm();
       }}
-    </Context.Consumer>;
+    </AuthContext.Consumer>;
   }
 }

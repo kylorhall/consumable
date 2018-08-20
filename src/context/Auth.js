@@ -5,16 +5,16 @@ import Firebase from '~/helpers/firebase';
 
 import Spinner from '~/components/Spinner';
 
-const defaultFirebaseContext = {
+const defaultState = {
   authReported: false,
   error: undefined,
   user: undefined,
 };
 
-export const Context = React.createContext(defaultFirebaseContext);
+export const Context = React.createContext(defaultState);
 
 export default class Auth extends Component {
-  state = defaultFirebaseContext
+  state = defaultState
 
   componentDidMount() {
     Firebase.auth.onAuthStateChanged(user => this.setState({ authReported: true, user }));
