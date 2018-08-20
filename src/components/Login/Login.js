@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+import config from '~/config';
+
 import Firebase from '~/helpers/firebase';
 import { Context as AuthContext } from '~/context/Auth';
 
@@ -28,7 +30,7 @@ export default class Login extends React.Component {
   loginWithEmail = async () => {
     try {
       await Firebase.auth.sendSignInLinkToEmail(this.state.email, {
-        url: 'https://consumeables.app/login/passwordless',
+        url: `${config.url}/login/passwordless`,
         handleCodeInApp: true,
       });
 
