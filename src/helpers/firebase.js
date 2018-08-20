@@ -1,10 +1,9 @@
 import firebase from 'firebase/app';
 
 import 'firebase/auth';
-import 'firebase/database';
-// import "firebase/firestore");
-// import "firebase/messaging");
-// import "firebase/functions");
+import 'firebase/firestore';
+// import "firebase/messaging";
+// import "firebase/functions";
 
 const config = {
   apiKey: 'AIzaSyBqrWUrEcDOEl3vfBeHu6YJOW0fgYyL9SE',
@@ -17,7 +16,15 @@ const config = {
 
 firebase.initializeApp(config);
 
+export const auth = firebase.auth();
+
+export const db = firebase.firestore();
+db.settings({ timestampsInSnapshots: true });
+
+export const GoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
 export default {
-  auth: firebase.auth(),
-  GoogleAuthProvider: new firebase.auth.GoogleAuthProvider(),
+  auth,
+  db,
+  GoogleAuthProvider,
 };
