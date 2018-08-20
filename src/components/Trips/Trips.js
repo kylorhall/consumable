@@ -14,16 +14,14 @@ export class Trips extends React.Component {
   async componentDidMount() {
     const query = await db.collection('trips').where('userId', '==', this.props.user.uid).get();
 
+    // must iterate over query in this manner; it is not an array
     const trips = [];
     query.forEach(doc => trips.push({
       id: doc.id,
       ...doc.data(),
     }));
 
-    this.setState({
-      loading: false,
-      trips,
-    });
+    this.setState({ loading: false, trips });
   }
 
   render() {
