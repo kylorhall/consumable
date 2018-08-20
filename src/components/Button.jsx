@@ -7,7 +7,7 @@ export default styled.button`
   border-radius: ${dimensions.borderRadius};
   border: 0;
   color: #fff;
-  line-height: 3.2rem;
+  line-height: ${dimensions.height};
   padding: 0 ${dimensions.padding};
   cursor: pointer;
   transition: 250ms all;
