@@ -3,7 +3,7 @@ import React from 'react';
 import { Context as AuthContext } from '~/context/Auth';
 
 import Spinner from '~/components/Spinner';
-import Firebase from '~/helpers/firebase';
+import { db } from '~/helpers/firebase';
 
 export class Trips extends React.Component {
   state = {
@@ -12,7 +12,7 @@ export class Trips extends React.Component {
   }
 
   async componentDidMount() {
-    const query = await Firebase.db.collection('trips').where('userId', '===', this.props.user.uid).get();
+    const query = await db.collection('trips').where('userId', '==', this.props.user.uid).get();
 
     const trips = [];
     query.forEach(doc => trips.push({
