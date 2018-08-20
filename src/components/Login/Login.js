@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 import Firebase from '~/helpers/firebase';
-import { Context } from '~/composers/Auth';
+import { Context } from '~/context/Auth';
 
 import Input from '~/components/Form/Input';
 

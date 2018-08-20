@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import AuthContainer from '~/composers/Auth';
+import AuthContainer from '~/context/Auth';
 
 import Login from '~/components/Login';
 import User from '~/components/User';
