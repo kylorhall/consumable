@@ -1,13 +1,12 @@
 export default {
-  whiteGrey: '#F1F7ED',
-  lightGrey: '#E8E2D6',
+  whiteGrey: '#f8f8f8',
+  lightGrey: '#e8e8e8',
   grey: '#ccc',
-  green: '#5FAD56',
+  green: 'green',
   yellow: '#F2C14E',
-  pear: '#DDD92A',
+  yellowBright: '#ffee58',
   orange: '#F78154',
   red: 'red',
   indigo: '#254254',
   blue: '#094D92',
-  link: '#7DCFB6',
 };
