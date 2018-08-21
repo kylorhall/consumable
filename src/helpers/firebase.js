@@ -20,6 +20,7 @@ export const auth = firebase.auth();
 
 export const db = firebase.firestore();
 db.settings({ timestampsInSnapshots: true });
+db.enablePersistence();
 
 export const GoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
