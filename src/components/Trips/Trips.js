@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import { Context as AuthContext } from '~/context/Auth';
 
@@ -29,7 +30,7 @@ export class Trips extends React.Component {
 
     return <React.Fragment>
       {this.state.trips.length > 0 && this.state.trips.map(trip => <div key={trip.id}>
-        {trip.id}: {trip.name}
+        <Link to={`/trips/${trip.id}`}>{trip.id}</Link>: {trip.name}
       </div>)}
     </React.Fragment>;
   }
