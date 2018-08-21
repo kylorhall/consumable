@@ -21,7 +21,9 @@ module.exports = {
     es6: true,
   },
   rules: {
-    'import/no-unresolved': 0, // not compatible with parcel ~/ resolves
+    'import/no-unresolved': 'off', // not compatible with parcel ~/ resolves
+    'max-len': ['warn', 140],
+    'prefer-destructuring': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
