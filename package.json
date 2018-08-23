@@ -4,7 +4,8 @@
   "description": "An application for tracking consumables for hikes and restocks especially.",
   "main": "index.js",
   "scripts": {
-    "start": "yarn && parcel ./src/index.html"
+    "start": "yarn && parcel ./src/index.html",
+    "build": "yarn && parcel build --out-dir ./dist ./src/index.html --experimental-scope-hoisting"
   },
   "keywords": [
     "parcel",
