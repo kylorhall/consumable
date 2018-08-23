@@ -2,17 +2,24 @@ import React from 'react';
 
 import { Context as AuthContext } from '~/context/Auth';
 import { db } from '~/helpers/firebase';
+import convertEnergy, { base as baseEnergy } from '~/helpers/energy';
 
 import Button from '~/components/Button';
 import Input from '~/components/Form/Input';
-import Select from '~/components/Form/Select';
+import NumberInput from '~/components/Form/NumberInput';
+import EnergySelect from '~/components/Form/EnergySelect';
 import Spinner from '~/components/Spinner';
 
 export class Trip extends React.Component {
   state = {
     error: undefined,
     loading: true,
-    trip: {},
+
+    // trip
+    id: undefined,
+    name: undefined,
+    energy: undefined,
+    energyUnit: baseEnergy.abbr,
   }
 
   async componentDidMount() {
@@ -25,53 +32,44 @@ export class Trip extends React.Component {
     return this.createTrip(e);
   }
 
-  onChange = (event) => {
-    const target = event.currentTarget;
-    const name = event.currentTarget.getAttribute('name');
-    let value = target.value;
-
-    if (!target) return;
-
-    if (target.options && target.options.length && target.options[target.selectedIndex] !== undefined) { // change select
-      value = target.options[target.selectedIndex].value; // selected value
-    } else if (target.getAttribute('type') === 'checkbox') { // change textbox
-      value = target.checked;
-    }
-
-    if (value !== undefined) {
-      this.setState(state => ({
-        trip: {
-          ...state.trip,
-          [name]: value,
-        },
-      }));
-    }
+  onChangeName = (e) => {
+    this.setState({ name: e.currentTarget.value || '' });
   }
 
-  getTripForFirebase = () => {
-    // WARNING: Mutating trip below, intentionally!
-    const trip = {
-      ...this.state.trip,
-      dailyEnergyUnit: this.state.trip.dailyEnergyUnit || 'kcal', // default to kcal
-      userId: this.props.user.uid, // needs an authentication id!
-    };
-    delete trip.id; // Must delete the id.
-    return trip;
+  onChangeEnergyUnit = (e) => {
+    const value = e.currentTarget.value || '';
+    this.setState(state => ({
+      energyUnit: value,
+      energy: this.recalculateEnergy(state.energy, state.energyUnit, value),
+    }));
   }
+
+  onChangeFormattedEnergy = ({ value, formattedValue }) => {
+    this.setState({
+      energy: value,
+      energyFormatted: formattedValue,
+    });
+  }
+
+  // NOTE: Excluding `id` intentionally, for firebase.
+  getTripForFirebase = () => ({
+    name: this.state.name,
+    energy: this.state.energy,
+    energyUnit: this.state.energyUnit || this.props.user.baseEnergy,
+    userId: this.props.user.uid, // needs an authentication id!
+  })
 
   fetchTrip = async (tripId) => {
     const doc = await db.collection('trips').doc(tripId).get();
 
     return this.setState({
       loading: false,
-      trip: {
-        id: doc.id,
-        ...doc.data(),
-      },
+      id: doc.id,
+      ...doc.data(),
     });
   }
 
-  canEdit = () => this.state.trip.userId === this.props.user.uid
+  canEdit = () => this.state.userId === this.props.user.uid
 
   createTrip = async () => {
     this.setState({ loading: true });
@@ -90,7 +88,7 @@ export class Trip extends React.Component {
   updateTrip = async () => {
     this.setState({ loading: true });
     try {
-      await db.collection('trips').doc(this.state.trip.id).update(this.getTripForFirebase());
+      await db.collection('trips').doc(this.state.id).update(this.getTripForFirebase());
       this.setState({ loading: false }); // successful if there is no error
     } catch (e) {
       console.error(e);
@@ -98,23 +96,24 @@ export class Trip extends React.Component {
     }
   }
 
+  recalculateEnergy = (value, from, to) => convertEnergy({
+    value: value || 0,
+    from: from || baseEnergy.abbr,
+    to: to || baseEnergy.abbr,
+  })
+
   // NOTE: renderTrip consumes AuthContext.Consumer!
   renderTrip = () => {
-    if (!this.state.trip.id && !this.props.user) return <h1>404, Trip Not Found</h1>;
-    if (!this.state.trip.id) return <h1>404 • Trip Not found</h1>;
+    if (!this.state.id && !this.props.user) return <h1>404, Trip Not Found</h1>;
+    if (!this.state.id) return <h1>404 • Trip Not found</h1>;
 
     return <React.Fragment>
-      <Input label="Name" required value={this.state.trip.name} name="name" onChange={this.onChange} />
-      <Input label="Daily Energy Estimate" required value={this.state.trip.dailyEnergy} name="dailyEnergy" onChange={this.onChange} />
-      <Select
-        label="Energy Unit"
-        options={[
-          { value: 'kcal', label: 'Calories' },
-          { value: 'kj', label: 'Kilojoules' },
-        ]}
-        value={this.state.trip.dailyEnergyUnit || 'kcal'} // default to first
-        name="dailyEnergyUnit"
-        onChange={this.onChange}
+      <Input label="Name" value={this.state.name} name="name" onChange={this.onChangeName} />
+      <NumberInput label="Daily Energy Estimate" value={this.state.energy} name="energy" onValueChange={this.onChangeFormattedEnergy} />
+
+      <EnergySelect
+        value={this.state.energyUnit || this.props.user.energyUnit}
+        onChange={this.onChangeEnergyUnit}
       />
 
       <Button onClick={this.onSubmit} />
