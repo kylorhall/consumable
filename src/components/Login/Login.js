@@ -69,9 +69,9 @@ export default class Login extends React.Component {
 
     <Buttons>
       <Input label="email" type="email" required value={this.state.email} name="email" onChange={this.onChangeEmail} />
-      <EmailButton onClick={this.loginWithEmail} />
 
-      <hr />
+      <br />
+      <EmailButton onClick={this.loginWithEmail} />
       <GoogleButton onClick={this.loginWithGoogle} />
       <GuestButton onClick={this.loginAnonymously} />
     </Buttons>
