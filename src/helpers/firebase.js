@@ -10,8 +10,8 @@ const config = {
   authDomain: 'consumable-5d7ab.firebaseapp.com',
   databaseURL: 'https://consumable-5d7ab.firebaseio.com',
   projectId: 'consumable-5d7ab',
-  storageBucket: 'consumable-5d7ab.appspot.com',
-  messagingSenderId: '604648436842',
+  // storageBucket: 'consumable-5d7ab.appspot.com',
+  // messagingSenderId: '604648436842',
 };
 
 firebase.initializeApp(config);
