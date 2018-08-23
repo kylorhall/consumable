@@ -4454,6 +4454,13 @@ react-is@^16.3.1:
   version "16.4.2"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.4.2.tgz#84891b56c2b6d9efdee577cc83501dfc5ecead88"
 
+react-number-format@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/react-number-format/-/react-number-format-3.5.1.tgz#62b1de7b5139f7fcb87ee5d093dad72fa1c58191"
+  dependencies:
+    babel-runtime "^6.26.0"
+    prop-types "^15.6.0"
+
 react-router-dom@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router-dom/-/react-router-dom-4.3.1.tgz#4c2619fc24c4fa87c9fd18f4fb4a43fe63fbd5c6"
