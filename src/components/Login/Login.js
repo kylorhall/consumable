@@ -1,14 +1,15 @@
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import Divider from '@material-ui/core/Divider';
 
 import config from '~/config';
-
 import Firebase from '~/helpers/firebase';
-import { Context as AuthContext } from '~/context/Auth';
-
 import Input from '~/components/Form/Input';
 
-import Buttons from './Buttons';
 import EmailButton from './EmailButton';
 import GoogleButton from './GoogleButton';
 import GuestButton from './GuestButton';
@@ -20,7 +21,7 @@ export default class Login extends React.Component {
   }
 
   onChangeEmail = (e) => {
-    this.setState({ email: e.currentTarget.value || '' });
+    this.setState({ email: e.target.value || '' });
   }
 
   handleAuthError = () => {
@@ -60,29 +61,32 @@ export default class Login extends React.Component {
     }
   }
 
-  renderRedirect = () => <Redirect to="/user" />
-
-  renderLoginForm = () => <form>
-    <p>
-      {this.state.message}
-    </p>
-
-    <Buttons>
-      <Input label="email" type="email" required value={this.state.email} name="email" onChange={this.onChangeEmail} />
-
-      <br />
-      <EmailButton onClick={this.loginWithEmail} />
-      <GoogleButton onClick={this.loginWithGoogle} />
-      <GuestButton onClick={this.loginAnonymously} />
-    </Buttons>
-  </form>
-
   render() {
-    return <AuthContext.Consumer>
-      {({ user }) => {
-        if (user) return this.renderRedirect();
-        return this.renderLoginForm();
-      }}
-    </AuthContext.Consumer>;
+    return <Dialog onClose={this.props.onClose} aria-labelledby="login-dialog" open={this.props.open}>
+      <DialogTitle id="login-dialog">Please Login</DialogTitle>
+      <form>
+        {this.state.message && <p>{this.state.message}</p>}
+
+        <List>
+          <ListItem dense>
+            <Input label="Email Address" type="email" fullWidth value={this.state.email} name="email" onChange={this.onChangeEmail} />
+          </ListItem>
+
+          <ListItem dense>
+            <EmailButton onClick={this.loginWithEmail} fullWidth />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem dense>
+            <GoogleButton onClick={this.loginWithGoogle} fullWidth />
+          </ListItem>
+
+          <ListItem dense>
+            <GuestButton onClick={this.loginAnonymously} fullWidth />
+          </ListItem>
+        </List>
+      </form>
+    </Dialog>;
   }
 }

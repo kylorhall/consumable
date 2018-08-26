@@ -6,7 +6,6 @@ import LuxonUtils from 'material-ui-pickers/utils/luxon-utils';
 
 import AuthContainer from '~/context/Auth';
 
-import Login from '~/components/Login';
 import Trip from '~/components/Trip';
 import Trips from '~/components/Trips';
 import User from '~/components/User';
@@ -23,15 +22,16 @@ export default () => <BrowserRouter>
       <GridLayout>
         <Header />
 
-        <Sidebar />
+        <Sidebar>
+          <User />
+        </Sidebar>
 
         <Content>
           <Switch>
-            <Route path="/login" component={Login} />
+            <Route path="/" component={Trips} exact />
             <Route path="/trips" component={Trips} exact />
             <Route path="/trips/:id" component={Trip} />
             <Route path="/trips/new" component={Trip} exact />
-            <Route path="/user" component={User} />
           </Switch>
         </Content>
 
