@@ -1,10 +1,11 @@
 import React from 'react';
 
+import Button from '@material-ui/core/Button';
+
 import { Context as AuthContext } from '~/context/Auth';
 import { db } from '~/helpers/firebase';
 import convertEnergy, { base as baseEnergy } from '~/helpers/energy';
 
-import Button from '~/components/Button';
 import Input from '~/components/Form/Input';
 import NumberInput from '~/components/Form/NumberInput';
 import EnergySelect from '~/components/Form/EnergySelect';
@@ -116,7 +117,7 @@ export class Trip extends React.Component {
         onChange={this.onChangeEnergyUnit}
       />
 
-      <Button onClick={this.onSubmit} />
+      <Button onClick={this.onSubmit} color="primary" variant="contained">Save Trip</Button>
     </React.Fragment>;
   }
 
