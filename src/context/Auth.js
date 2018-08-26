@@ -23,14 +23,16 @@ export default class Auth extends Component {
 
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
-      this.grabUserSettings(user); // grab user settings async
-      this.setState({
+      this.grabUserSettings(user); // grab user settings, async
+
+      this.setState(state => ({
         authReported: true,
         user: {
           ...defaultState.user,
-          user,
+          ...state.user,
+          ...user,
         },
-      }); // set state with user; will be extended
+      })); // set state with user; will be extended
     });
   }
 
