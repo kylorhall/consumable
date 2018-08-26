@@ -32,6 +32,8 @@ export class Trips extends React.Component {
       {this.state.trips.length > 0 && this.state.trips.map(trip => <div key={trip.id}>
         <Link to={`/trips/${trip.id}`}>{trip.id}</Link>: {trip.name}
       </div>)}
+
+      <Link to="/trips/new">Add a Trip</Link>
     </React.Fragment>;
   }
 }
