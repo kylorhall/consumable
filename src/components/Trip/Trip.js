@@ -38,7 +38,6 @@ export class Trip extends React.Component {
   }
 
   onChangeAmount = ({ amount, unit }) => {
-    console.log('@onChangeAmount', amount, unit);
     this.setState({ energy: amount, energyUnit: unit });
   }
 
@@ -71,7 +70,7 @@ export class Trip extends React.Component {
       // change to new url
       this.props.history.push(`/trips/${trip.id}`);
     } catch (e) {
-      console.error(e);
+      console.error(e); // eslint-disable-line no-console
       this.setState({ loading: false, error: e.message });
     }
   }
@@ -82,7 +81,7 @@ export class Trip extends React.Component {
       await db.collection('trips').doc(this.state.id).update(this.getTripForFirebase());
       this.setState({ loading: false }); // successful if there is no error
     } catch (e) {
-      console.error(e);
+      console.error(e); // eslint-disable-line no-console
       this.setState({ loading: false, error: e.message });
     }
   }
