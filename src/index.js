@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import 'typeface-roboto';
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
 
