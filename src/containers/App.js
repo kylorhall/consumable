@@ -24,9 +24,9 @@ export default () => <BrowserRouter>
       <Content>
         <Switch>
           <Route path="/login" component={Login} />
-          <Route path="/trips/:id" component={Trip} />
-          <Route path="/trips/new" component={Trip} />
           <Route path="/trips" component={Trips} exact />
+          <Route path="/trips/:id" component={Trip} />
+          <Route path="/trips/new" component={Trip} exact />
           <Route path="/user" component={User} />
         </Switch>
       </Content>
