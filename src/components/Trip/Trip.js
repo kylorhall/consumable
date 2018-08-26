@@ -53,7 +53,7 @@ export class Trip extends React.Component {
   getTripForFirebase = () => ({
     name: this.state.name,
     energy: this.state.energy,
-    energyUnit: this.state.energyUnit || this.props.user.baseEnergy,
+    energyUnit: this.state.energyUnit || this.props.user.energyUnit,
     userId: this.props.user.uid, // needs an authentication id!
   })
 
@@ -111,7 +111,6 @@ export class Trip extends React.Component {
         <DatePicker label="Start Date" name="startDate" value={this.state.startDate} onChange={this.onChangeDate('startDate')} />
         <DatePicker label="End Date" name="endDate" value={this.state.endDate} onChange={this.onChangeDate('endDate')} />
       </div>
-
 
       <UnitGroup
         amount={this.state.energy}
