@@ -4,11 +4,9 @@ import Button from '@material-ui/core/Button';
 
 import { Context as AuthContext } from '~/context/Auth';
 import { db } from '~/helpers/firebase';
-import convertEnergy, { base as baseEnergy } from '~/helpers/energy';
 
 import Input from '~/components/Form/Input';
-import NumberInput from '~/components/Form/NumberInput';
-import EnergySelect from '~/components/Form/EnergySelect';
+import UnitGroup from '~/components/Form/UnitGroup';
 import Spinner from '~/components/Spinner';
 
 export class Trip extends React.Component {
@@ -34,22 +32,12 @@ export class Trip extends React.Component {
   }
 
   onChangeName = (e) => {
-    this.setState({ name: e.currentTarget.value || '' });
+    this.setState({ name: e.target.value || '' });
   }
 
-  onChangeEnergyUnit = (e) => {
-    const value = e.currentTarget.value || '';
-    this.setState(state => ({
-      energyUnit: value,
-      energy: this.recalculateEnergy(state.energy, state.energyUnit, value),
-    }));
-  }
-
-  onChangeFormattedEnergy = ({ value, formattedValue }) => {
-    this.setState({
-      energy: value,
-      energyFormatted: formattedValue,
-    });
+  onChangeAmount = ({ amount, unit }) => {
+    console.log('@onChangeAmount', amount, unit);
+    this.setState({ energy: amount, energyUnit: unit });
   }
 
   // NOTE: Excluding `id` intentionally, for firebase.
@@ -97,24 +85,25 @@ export class Trip extends React.Component {
     }
   }
 
-  recalculateEnergy = (value, from, to) => convertEnergy({
-    value: value || 0,
-    from: from || baseEnergy.abbr,
-    to: to || baseEnergy.abbr,
-  })
-
   // NOTE: renderTrip consumes AuthContext.Consumer!
   renderTrip = () => {
     if (!this.state.id && !this.props.user) return <h1>404, Trip Not Found</h1>;
     if (!this.state.id) return <h1>404 • Trip Not found</h1>;
 
     return <React.Fragment>
-      <Input label="Name" value={this.state.name} name="name" onChange={this.onChangeName} />
-      <NumberInput label="Daily Energy Estimate" value={this.state.energy} name="energy" onValueChange={this.onChangeFormattedEnergy} />
+      <Input
+        label="Section Name"
+        name="name"
+        onChange={this.onChangeName}
+        value={this.state.name}
+      />
 
-      <EnergySelect
-        value={this.state.energyUnit || this.props.user.energyUnit}
-        onChange={this.onChangeEnergyUnit}
+      <UnitGroup
+        amount={this.state.energy}
+        amountLabel="Daily Energy"
+        onChange={this.onChangeAmount}
+        type="energy"
+        unit={this.state.energyUnit}
       />
 
       <Button onClick={this.onSubmit} color="primary" variant="contained">Save Trip</Button>
