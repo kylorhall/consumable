@@ -59,7 +59,13 @@ export default class Auth extends Component {
   }
 
   render() {
-    return <Context.Provider value={{ ...this.state }}>
+    const context = {
+      authReported: this.state.authReported,
+      error: this.state.error,
+      user: (this.state.user && this.state.user.id) ? this.state.user : undefined,
+    };
+
+    return <Context.Provider value={context}>
       <p>Uid: {this.state.user && this.state.user.uid}</p>
 
       {this.renderChildren()}
