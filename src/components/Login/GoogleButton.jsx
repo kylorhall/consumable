@@ -1,15 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { FaGoogle } from 'react-icons/fa';
 
-import Button from '~/components/Button';
+import Button from '@material-ui/core/Button';
 
-const ColoredButton = styled(Button)`
-  background: #4285f4;
-  color: #fff;
-`;
-
-export default ({ onClick }) => <ColoredButton onClick={onClick} type="button">
+// TODO: Properly style this and use material-icons
+export default props => <Button variant="contained" color="primary" {...props}>
   <FaGoogle />
   Login with Google
-</ColoredButton>;
+</Button>;

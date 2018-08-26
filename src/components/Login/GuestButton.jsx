@@ -1,15 +1,10 @@
 import React from 'react';
-import styled from 'styled-components';
 import { FaUserSecret } from 'react-icons/fa';
 
-import Button from '~/components/Button';
+import Button from '@material-ui/core/Button';
 
-const ColoredButton = styled(Button)`
-  background: #777;
-  color: #fff;
-`;
-
-export default ({ onClick }) => <ColoredButton onClick={onClick} type="button">
+// TODO: Properly style this and use material-icons
+export default ({ onClick }) => <Button onClick={onClick} type="button">
   <FaUserSecret />
   Login as a Guest
-</ColoredButton>;
+</Button>;
