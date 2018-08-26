@@ -9,6 +9,8 @@ import Input from '~/components/Form/Input';
 import UnitGroup from '~/components/Form/UnitGroup';
 import Spinner from '~/components/Spinner';
 
+import FormContainer from './Container';
+
 export class Trip extends React.Component {
   state = {
     error: undefined,
@@ -113,10 +115,10 @@ export class Trip extends React.Component {
   render() {
     if (this.state.loading) return <Spinner />;
 
-    return <form onSubmit={this.onSubmit}>
+    return <FormContainer onSubmit={this.onSubmit} autoComplete="off">
       {this.state.error && <mark>Error: {this.state.error}</mark>}
       {this.renderTrip()}
-    </form>;
+    </FormContainer>;
   }
 }
 
