@@ -29,8 +29,8 @@ export class UnitGroup extends React.Component {
   }
 
   getDefaultUnit = () => {
-    if (this.props.type === 'energy') return this.props.user.baseEnergy || baseEnergy;
-    if (this.props.type === 'weight') return this.props.user.baseWeight || baseWeight;
+    if (this.props.type === 'energy') return this.props.user.energyUnit || baseEnergy;
+    if (this.props.type === 'weight') return this.props.user.weightUnit || baseWeight;
     throw new Error(`Invalid type for UnitGroup: ${this.props.type}`);
   }
 
