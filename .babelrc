@@ -6,6 +6,7 @@
     "babel-plugin-styled-components",
     "babel-plugin-transform-class-properties",
     "babel-plugin-transform-object-rest-spread",
+    "babel-plugin-transform-react-remove-prop-types",
     ["babel-plugin-transform-runtime", {
       "polyfill": false,
       "regenerator": true

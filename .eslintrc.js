@@ -28,6 +28,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
     semi: ['error', 'always'],
+    'import/no-extraneous-dependencies': ["error", { devDependencies: true }], // allow prop-types
 
     // because eslint v5 + airbnb isn't so nice right now..
     'react/destructuring-assignment': 'off',
