@@ -7,13 +7,16 @@ import { baseUnit as baseWeight } from '~/helpers/weight';
 
 import Spinner from '~/components/Spinner';
 
+const extendUser = {
+  // when building a user, we spread this so a user always has default settings
+  energyUnit: baseEnergy,
+  weightUnit: baseWeight,
+};
+
 const defaultState = {
   authReported: false,
   error: undefined,
-  user: {
-    energyUnit: baseEnergy,
-    weightUnit: baseWeight,
-  },
+  user: undefined,
 };
 
 export const Context = React.createContext(defaultState);
@@ -28,7 +31,7 @@ export default class Auth extends Component {
       this.setState(state => ({
         authReported: true,
         user: {
-          ...defaultState.user,
+          ...extendUser,
           ...state.user,
           ...user,
         },
@@ -37,6 +40,8 @@ export default class Auth extends Component {
   }
 
   grabUserSettings = async (user) => {
+    if (!user) return;
+
     const doc = await db.collection('users').doc(user.uid).get();
     if (!doc.exists) return; // user not found
 
@@ -45,7 +50,7 @@ export default class Auth extends Component {
 
       return {
         user: {
-          ...defaultState.user,
+          ...extendUser,
           ...user,
           ...doc.data(),
         },
@@ -62,7 +67,8 @@ export default class Auth extends Component {
     const context = {
       authReported: this.state.authReported,
       error: this.state.error,
-      user: (this.state.user && this.state.user.id) ? this.state.user : undefined,
+      // NOTE: If the user does not have a uid, they are not valid to me
+      user: this.state.user && this.state.user.uid ? this.state.user : undefined,
     };
 
     return <Context.Provider value={context}>
