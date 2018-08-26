@@ -24,7 +24,7 @@ export class Trip extends React.Component {
     energy: undefined,
     energyUnit: undefined,
     startDate: DateTime.local(),
-    endDate: DateTime.local(),
+    endDate: DateTime.local().plus({ days: 2 }),
   }
 
   async componentDidMount() {
