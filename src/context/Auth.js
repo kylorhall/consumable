@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 
 import { auth, db } from '~/helpers/firebase';
-import { base as baseEnergy } from '~/helpers/energy';
-import { base as baseWeight } from '~/helpers/weight';
+import { baseUnit as baseEnergy } from '~/helpers/energy';
+import { baseUnit as baseWeight } from '~/helpers/weight';
 
 import Spinner from '~/components/Spinner';
 
@@ -11,8 +11,8 @@ const defaultState = {
   authReported: false,
   error: undefined,
   user: {
-    energyUnit: baseEnergy.abbr,
-    weightUnit: baseWeight.abbr,
+    energyUnit: baseEnergy,
+    weightUnit: baseWeight,
   },
 };
 
