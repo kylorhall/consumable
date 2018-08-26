@@ -20,7 +20,7 @@ export class Trip extends React.Component {
     id: undefined,
     name: undefined,
     energy: undefined,
-    energyUnit: baseEnergy.abbr,
+    energyUnit: undefined,
   }
 
   async componentDidMount() {
