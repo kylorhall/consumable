@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import 'typeface-roboto';
 import styledNormalize from 'styled-normalize';
 import { injectGlobal } from 'styled-components';
 
@@ -9,6 +10,10 @@ import App from '~/containers/App';
 // eslint-disable-next-line no-unused-expressions
 injectGlobal`
   ${styledNormalize}
+
+  * {
+    font-family: Roboto, sans-serif;
+  }
 
   html {
     height: 100vh;
