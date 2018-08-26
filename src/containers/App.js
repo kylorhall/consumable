@@ -1,6 +1,9 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import LuxonUtils from 'material-ui-pickers/utils/luxon-utils';
+
 import AuthContainer from '~/context/Auth';
 
 import Login from '~/components/Login';
@@ -16,22 +19,24 @@ import Footer from '~/containers/Footer';
 
 export default () => <BrowserRouter>
   <AuthContainer>
-    <GridLayout>
-      <Header />
+    <MuiPickersUtilsProvider utils={LuxonUtils}>
+      <GridLayout>
+        <Header />
 
-      <Sidebar />
+        <Sidebar />
 
-      <Content>
-        <Switch>
-          <Route path="/login" component={Login} />
-          <Route path="/trips" component={Trips} exact />
-          <Route path="/trips/:id" component={Trip} />
-          <Route path="/trips/new" component={Trip} exact />
-          <Route path="/user" component={User} />
-        </Switch>
-      </Content>
+        <Content>
+          <Switch>
+            <Route path="/login" component={Login} />
+            <Route path="/trips" component={Trips} exact />
+            <Route path="/trips/:id" component={Trip} />
+            <Route path="/trips/new" component={Trip} exact />
+            <Route path="/user" component={User} />
+          </Switch>
+        </Content>
 
-      <Footer />
-    </GridLayout>
+        <Footer />
+      </GridLayout>
+    </MuiPickersUtilsProvider>
   </AuthContainer>
 </BrowserRouter>;

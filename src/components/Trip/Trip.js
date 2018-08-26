@@ -1,13 +1,15 @@
 import React from 'react';
+import { DateTime } from 'luxon';
 
 import Button from '@material-ui/core/Button';
 
 import { Context as AuthContext } from '~/context/Auth';
 import { db } from '~/helpers/firebase';
 
+import DatePicker from '~/components/Form/DatePicker';
 import Input from '~/components/Form/Input';
-import UnitGroup from '~/components/Form/UnitGroup';
 import Spinner from '~/components/Spinner';
+import UnitGroup from '~/components/Form/UnitGroup';
 
 import FormContainer from './Container';
 
@@ -21,6 +23,8 @@ export class Trip extends React.Component {
     name: undefined,
     energy: undefined,
     energyUnit: undefined,
+    startDate: DateTime.local(),
+    endDate: DateTime.local(),
   }
 
   async componentDidMount() {
@@ -39,6 +43,10 @@ export class Trip extends React.Component {
 
   onChangeAmount = ({ amount, unit }) => {
     this.setState({ energy: amount, energyUnit: unit });
+  }
+
+  onChangeDate = name => (date) => {
+    this.setState({ [name]: date });
   }
 
   // NOTE: Excluding `id` intentionally, for firebase.
@@ -98,6 +106,12 @@ export class Trip extends React.Component {
         onChange={this.onChangeName}
         value={this.state.name}
       />
+
+      <div>
+        <DatePicker label="Start Date" name="startDate" value={this.state.startDate} onChange={this.onChangeDate('startDate')} />
+        <DatePicker label="End Date" name="endDate" value={this.state.endDate} onChange={this.onChangeDate('endDate')} />
+      </div>
+
 
       <UnitGroup
         amount={this.state.energy}
