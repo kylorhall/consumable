@@ -14,6 +14,7 @@ export const units = {
 };
 
 export const base = units.kcal; // NOTE: All conversions are based off of kcal as the base unit.
+export const baseUnit = base.abbr;
 
 export default ({ from, to, value }) => convert({
   from, to, value, units,

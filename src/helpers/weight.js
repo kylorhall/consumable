@@ -26,6 +26,7 @@ export const units = {
 
 // NOTE: All conversions are based off of grams as the base unit, so oz => lb converts to grams first.  This may cause more rounding issues.
 export const base = units.g;
+export const baseUnit = base.abbr;
 
 export default ({ from, to, value }) => convert({
   from, to, value, units,
