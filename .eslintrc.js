@@ -21,14 +21,15 @@ module.exports = {
     es6: true,
   },
   rules: {
+    'import/no-extraneous-dependencies': ["error", { devDependencies: true }], // allow prop-types
     'import/no-unresolved': 'off', // not compatible with parcel ~/ resolves
     'max-len': ['warn', 140],
     'prefer-destructuring': 'off',
     'react/jsx-filename-extension': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'react/sort-comp': 'off', // don't really like it sometimes
     semi: ['error', 'always'],
-    'import/no-extraneous-dependencies': ["error", { devDependencies: true }], // allow prop-types
 
     // because eslint v5 + airbnb isn't so nice right now..
     'react/destructuring-assignment': 'off',
