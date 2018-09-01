@@ -8,7 +8,7 @@ import uuid from '~/helpers/uuid';
 export const FormInput = ({ label, ...props }) => <FormControl {...props}>
   {label !== false && <InputLabel htmlFor={props.id}>{label}</InputLabel>}
 
-  <Input {...props} />
+  <Input {...props} value={props.value || ''} />
 </FormControl>;
 
 FormInput.defaultProps = {
