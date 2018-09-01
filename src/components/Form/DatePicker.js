@@ -7,7 +7,6 @@ export default props => <DatePicker
   // disableOpenOnEnter
   // keyboard
   // mask={[/\d/, /\d/, '/', /\d/, /\d/, '/', /\d/, /\d/, /\d/, /\d/]}
-  openTo="date"
   placeholder="MM/DD/YYYY"
   {...props}
 />;
