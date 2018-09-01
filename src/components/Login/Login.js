@@ -7,7 +7,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Divider from '@material-ui/core/Divider';
 
 import config from '~/config';
-import Firebase from '~/helpers/firebase';
+import { auth, GoogleAuthProvider } from '~/helpers/firebase';
 import Input from '~/components/Form/Input';
 
 import EmailButton from './EmailButton';
@@ -30,7 +30,7 @@ export default class Login extends React.Component {
 
   loginWithEmail = async () => {
     try {
-      await Firebase.auth.sendSignInLinkToEmail(this.state.email, {
+      await auth.sendSignInLinkToEmail(this.state.email, {
         url: `${config.url}/login/passwordless`,
         handleCodeInApp: true,
       });
@@ -44,8 +44,8 @@ export default class Login extends React.Component {
 
   loginWithGoogle = async () => {
     try {
-      const provider = Firebase.GoogleAuthProvider;
-      const result = await Firebase.auth.signInWithPopup(provider);
+      const provider = GoogleAuthProvider;
+      const result = await auth.signInWithPopup(provider);
 
       window.localStorage.getItem('googleAccessToken', result.credential.accessToken);
     } catch (e) {
@@ -55,7 +55,7 @@ export default class Login extends React.Component {
 
   loginAnonymously = async () => {
     try {
-      await Firebase.auth.signInAnonymously();
+      await auth.signInAnonymously();
     } catch (e) {
       this.handleAuthError(e);
     }
