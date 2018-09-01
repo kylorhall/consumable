@@ -2,10 +2,7 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 
 import { Context } from '~/context/Auth';
-import Firebase from '~/helpers/firebase';
 import Login from '~/components/Login';
-
-const signOut = async () => Firebase.auth.signOut();
 
 export default class User extends React.Component {
   state = {
@@ -22,7 +19,7 @@ export default class User extends React.Component {
     <Login open={this.state.open} onClose={this.closeLogin} />
   </React.Fragment>
 
-  renderLoggedIn = user => <div>
+  renderLoggedIn = (user, signOut) => <div>
       Welcome {user.displayName || user.uid}
 
     <Button onClick={signOut}>Sign Out</Button>
@@ -30,8 +27,8 @@ export default class User extends React.Component {
 
   render() {
     return <Context.Consumer>
-      {({ user }) => {
-        if (user) return this.renderLoggedIn(user);
+      {({ user, signOut }) => {
+        if (user) return this.renderLoggedIn(user, signOut);
         return this.renderLoggedOut(user);
       }}
     </Context.Consumer>;

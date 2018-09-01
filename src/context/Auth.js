@@ -67,7 +67,9 @@ export default class Auth extends Component {
     const context = {
       authReported: this.state.authReported,
       error: this.state.error,
-      // NOTE: If the user does not have a uid, they are not valid to me
+      signOut: auth.signOut, // function to signOut; `Firebase.auth().signOut()` works too..
+
+      // user must have a UID to be passed along due to our extending methodology
       user: this.state.user && this.state.user.uid ? this.state.user : undefined,
     };
 
