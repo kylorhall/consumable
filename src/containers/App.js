@@ -24,14 +24,14 @@ export default () => <BrowserRouter>
 
         <Sidebar>
           <User />
+          <Trips />
         </Sidebar>
 
         <Content>
           <Switch>
-            <Route path="/" component={Trips} exact />
-            <Route path="/trips" component={Trips} exact />
             <Route path="/trips/:id" component={Trip} />
-            <Route path="/trips/new" component={Trip} exact />
+            <Route path="/trips" component={Trip} exact />
+            <Route path="/" component={User} />
           </Switch>
         </Content>
 
