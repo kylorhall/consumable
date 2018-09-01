@@ -24,8 +24,22 @@ db.enablePersistence();
 
 export const GoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
 
-export default {
-  auth,
-  db,
-  GoogleAuthProvider,
+// general helpers
+export const parseModel = obj => Object.entries(obj).reduce((o, [key, value]) => {
+  if (value === undefined) return o;
+
+  let parsedValue = value;
+  if (typeof parsedValue.toDate === 'function') parsedValue = parsedValue.toDate();
+  if (typeof parsedValue.toJSDate === 'function') parsedValue = parsedValue.toJSDate();
+
+  return { ...o, [key]: parsedValue };
+}, []);
+
+export const saveToFirebase = async (collectionName, modelState) => {
+  const { id, ...data } = parseModel(modelState);
+
+  // we require an id to save or create
+  if (!id) throw new Error(`No ID provided, unable to save to ${collectionName}.`);
+
+  return db.collection(collectionName).doc(id).set(data, { merge: true });
 };
